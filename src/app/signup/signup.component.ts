@@ -1,11 +1,18 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
-  imports: [],
+  standalone: true,
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css',
+  styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
+  constructor(private router: Router) {}
 
+  onSignup() {
+    // Later you’ll replace this with a real signup API call
+    this.router.navigate(['/dashboard']);
+  }
 }
+

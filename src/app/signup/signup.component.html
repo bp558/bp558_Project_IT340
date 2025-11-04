@@ -7,7 +7,7 @@
       <p class="subtitle">Create your account below.</p>
     </div>
 
-    <form action="dashboard.html">
+    <form (ngSubmit)="onSignup()">
       <div class="form-group">
         <label for="name">Full Name</label>
         <input type="text" id="name" placeholder="Enter your name" required>
@@ -40,8 +40,8 @@
       </div>
 
       <div class="signup-link">
-        Already have an account? <a href="index.html">Login</a>
+        Already have an account? <a routerLink="/">Login</a>
+
       </div>
     </form>
   </div>
-<script src="js/main.js"></script>
