@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { App } from './app.component'; // fixed import
+import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -11,7 +10,7 @@ import { routes } from './app.routes';
 
 @NgModule({
   declarations: [
-    App,
+    AppComponent,
     HomeComponent,
     SignupComponent,
     DashboardComponent
@@ -20,10 +19,6 @@ import { routes } from './app.routes';
     BrowserModule,
     RouterModule.forRoot(routes)
   ],
-  bootstrap: [App]
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
-
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
-
