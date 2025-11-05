@@ -9,15 +9,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { routes } from './app.routes';
 
 @NgModule({
-  declarations: [
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(routes),
     AppComponent,
     HomeComponent,
     SignupComponent,
     DashboardComponent
-  ],
-  imports: [
-    BrowserModule,
-    RouterModule.forRoot(routes)
   ],
   bootstrap: [AppComponent]
 })

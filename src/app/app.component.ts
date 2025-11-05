@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-root',        // used in index.html to bootstrap the app
-  templateUrl: './app.html',   // points to your HTML file
-  styleUrls: ['./app.css']     // points to your CSS file
+  selector: 'app-root',
+  standalone: true,            // <-- mark as standalone
+  imports: [RouterModule],     // <-- allow routerLink and router-outlet
+  templateUrl: './app.html',
+  styleUrls: ['./app.css']
 })
-export class AppComponent {}   // simple class, no logic needed for now
+export class AppComponent {}
