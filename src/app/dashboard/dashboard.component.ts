@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms'; // Needed for ngModel
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 interface Note {
   title: string;
@@ -11,7 +12,7 @@ interface Note {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterModule, FormsModule],
+  imports: [RouterModule, FormsModule, CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })

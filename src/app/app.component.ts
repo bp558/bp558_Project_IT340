@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  standalone: true,            // <-- mark as standalone
-  imports: [RouterModule],     // <-- allow routerLink and router-outlet
+  standalone: true,
+  imports: [RouterModule, CommonModule],
   templateUrl: './app.html',
-  styleUrls: ['./app.css']
 })
 export class AppComponent {}

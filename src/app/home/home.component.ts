@@ -1,55 +1,20 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';  // Needed for ngModel
-
-interface Note {
-  title: string;
-  content: string;
-  category: string;
-}
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [RouterModule, FormsModule],
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-home',
+  standalone: true,          // make standalone
+  imports: [RouterModule],   // needed for routerLink and router.navigate
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class DashboardComponent {
-  // Array of notes
-  notes: Note[] = [];
+export class HomeComponent {
 
-  // Bindings for new note
-  newTitle = '';
-  newContent = '';
-  newCategory = 'all';
+  constructor(private router: Router) {}
 
-  // Add a new note
-  addNote() {
-    if (this.newTitle && this.newContent) {
-      this.notes.push({
-        title: this.newTitle,
-        content: this.newContent,
-        category: this.newCategory
-      });
-      this.newTitle = '';
-      this.newContent = '';
-    }
-  }
-
-  // Delete a note
-  deleteNote(index: number) {
-    this.notes.splice(index, 1);
-  }
-
-  // Filter notes by category
-  get filteredNotes() {
-    if (this.newCategory === 'all') return this.notes;
-    return this.notes.filter(n => n.category === this.newCategory);
-  }
-
-  // Change category filter
-  setCategory(cat: string) {
-    this.newCategory = cat;
+  login() {
+    // Here you would validate credentials
+    // For now, just navigate to dashboard
+    this.router.navigate(['/dashboard']);
   }
 }

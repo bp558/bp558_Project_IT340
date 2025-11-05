@@ -1,18 +1,21 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
-  standalone: true,         // make standalone
-  imports: [RouterModule],  // needed for routerLink and router.navigate
+  standalone: true,
+  imports: [RouterModule, FormsModule, CommonModule],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  constructor(private router: Router) {}
+  newEmail = '';
+  newPassword = '';
 
   onSignup() {
-    // Later you’ll replace this with a real signup API call
-    this.router.navigate(['/dashboard']);
+    // Placeholder logic: redirect to dashboard
+    console.log('Signup with', this.newEmail, this.newPassword);
   }
 }
