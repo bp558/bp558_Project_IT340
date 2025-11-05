@@ -1,51 +1,27 @@
-<header class="topbar" role="banner">
-  <div class="brand">
-    <div class="logo" aria-hidden="true">📝</div>
-    <h1>SimplyNotes</h1>
-    <span style="opacity:0.9; margin-left:8px; font-size:13px;">— your notes, organized</span>
+<div class="login-container">
+  <div class="logo-section">
+    <div class="logo">
+      <span class="logo-icon">📝</span>
+    </div>
+    <h1>Welcome to SimplyNotes</h1>
+    <p class="subtitle">Organize your notes, your way</p>
   </div>
 
-  <div class="actions">
-    <span id="currentUser">Signed in as <strong id="userEmail">you@example.com</strong></span>
-    <a routerLink="/" id="logout">Logout</a>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="Enter your email" />
   </div>
-</header>
 
-<main class="container" role="main">
-  <!-- Sidebar -->
-  <aside class="sidebar" aria-label="Sidebar">
-    <h3>Account</h3>
-    <div class="role-badge" id="roleBadge">Editor</div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="Enter your password" />
+  </div>
 
-    <div style="margin-top:12px;">
-      <strong>Folders / Categories</strong>
-      <div class="filters">
-        <button (click)="setCategory('all')">All Notes</button>
-        <button (click)="setCategory('personal')">Personal</button>
-        <button (click)="setCategory('work')">Work</button>
-        <button (click)="setCategory('archive')">Archive</button>
-      </div>
-    </div>
-  </aside>
+  <button class="login-button">Login</button>
 
-  <!-- Main content -->
-  <section class="main">
-    <div class="toolbar">
-      <div class="search-box">
-        <input type="search" placeholder="Search notes..." [(ngModel)]="newTitle" aria-label="Search notes" />
-      </div>
-      <div>
-        <button class="new-note" (click)="addNote()">+ New Note</button>
-      </div>
-    </div>
+  <div class="divider"><span>or</span></div>
 
-    <div class="notes-grid">
-      <div class="note-card" *ngFor="let note of notes; let i = index">
-        <h3>{{ note.title }}</h3>
-        <p>{{ note.content }}</p>
-        <p><em>{{ note.category }}</em></p>
-        <button (click)="deleteNote(i)">Delete</button>
-      </div>
-    </div>
-  </section>
-</main>
+  <div class="signup-link">
+    Don't have an account? <a routerLink="/signup">Sign Up</a>
+  </div>
+</div>
