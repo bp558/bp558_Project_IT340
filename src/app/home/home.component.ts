@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
+  standalone: true,          // make standalone
+  imports: [RouterModule],   // needed for routerLink and router.navigate
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -16,4 +18,3 @@ export class HomeComponent {
     this.router.navigate(['/dashboard']);
   }
 }
-

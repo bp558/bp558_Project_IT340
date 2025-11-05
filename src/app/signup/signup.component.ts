@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
-  standalone: true,
+  standalone: true,         // make standalone
+  imports: [RouterModule],  // needed for routerLink and router.navigate
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
@@ -15,4 +16,3 @@ export class SignupComponent {
     this.router.navigate(['/dashboard']);
   }
 }
-
