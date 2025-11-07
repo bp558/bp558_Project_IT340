@@ -10,15 +10,17 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./note-editor.component.css']
 })
 export class NoteEditorComponent {
-  @Input() note: any = { title: '', content: '' };
-  @Output() save = new EventEmitter<any>();
-  @Output() close = new EventEmitter<void>();
+  @Input() note = { title: '', content: '' };
+  @Output() save = new EventEmitter<{ title: string; content: string }>();
+  @Output() cancel = new EventEmitter<void>();
 
-  onSave() {
-  this.save.emit({ ...this.note }); // emit a copy
+  saveNote() {
+    if (this.note.title.trim() || this.note.content.trim()) {
+      this.save.emit({ ...this.note });
+    }
   }
 
-  onCancel() {
-    this.close.emit();
+  cancelEdit() {
+    this.cancel.emit();
   }
 }

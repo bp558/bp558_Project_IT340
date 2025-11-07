@@ -1,16 +1,19 @@
-<div class="editor-overlay">
-  <div class="editor-modal">
-    <h3>{{ note?.title ? 'Edit Note' : 'New Note' }}</h3>
+<div class="note-editor">
+  <h3>{{ note.title ? 'Edit Note' : 'New Note' }}</h3>
 
-    <label>Title</label>
-    <input [(ngModel)]="note.title" placeholder="Enter note title" />
+  <input
+    type="text"
+    placeholder="Note title"
+    [(ngModel)]="note.title"
+  />
 
-    <label>Content</label>
-    <textarea [(ngModel)]="note.content" rows="6" placeholder="Write your note here..."></textarea>
+  <textarea
+    placeholder="Note content"
+    [(ngModel)]="note.content"
+  ></textarea>
 
-    <div class="editor-actions">
-      <button (click)="onSave()">Save</button>
-      <button (click)="onCancel()">Cancel</button>
-    </div>
+  <div class="buttons">
+    <button (click)="saveNote()">Save</button>
+    <button (click)="cancelEdit()">Cancel</button>
   </div>
 </div>
