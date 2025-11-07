@@ -58,9 +58,11 @@
 </main>
 
 <!-- ✅ Only show the editor when open -->
+<!-- Editor Modal -->
 <app-note-editor
   *ngIf="isEditorOpen"
   [note]="selectedNote"
   (save)="saveNote($event)"
   (cancel)="closeEditor()"
 ></app-note-editor>
+

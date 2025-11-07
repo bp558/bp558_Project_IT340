@@ -10,8 +10,8 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./note-editor.component.css']
 })
 export class NoteEditorComponent {
-  @Input() note = { title: '', content: '' };
-  @Output() save = new EventEmitter<{ title: string; content: string }>();
+  @Input() note = { id: null, title: '', content: '' };
+  @Output() save = new EventEmitter<any>();
   @Output() cancel = new EventEmitter<void>();
 
   saveNote() {

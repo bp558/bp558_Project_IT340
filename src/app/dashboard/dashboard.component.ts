@@ -12,51 +12,48 @@ import { NoteEditorComponent } from '../note-editor/note-editor.component';
 })
 export class DashboardComponent {
   notes = [
-    { title: 'Sample Note', content: 'This is an example note.' }
+    { id: 1, title: 'Sample Note', content: 'This is an example note.' }
   ];
-  filteredNotes = this.notes;
+  filteredNotes = [...this.notes];
   isEditorOpen = false;
-  selectedNote: any = null;
-  searchQuery = '';
+  selectedNote: any = { id: null, title: '', content: '' };
 
+  // Open modal for a new note
   openEditor() {
-    this.selectedNote = null;
+    this.selectedNote = { id: null, title: '', content: '' };
     this.isEditorOpen = true;
   }
 
+  // Edit an existing note
   editNote(note: any) {
     this.selectedNote = { ...note };
     this.isEditorOpen = true;
   }
 
+  // Save note (add or update)
   saveNote(note: any) {
-    if (this.selectedNote) {
-      // Editing an existing note
-      const index = this.notes.findIndex(
-        n => n.title === this.selectedNote.title && n.content === this.selectedNote.content
-      );
+    if (note.id) {
+      const index = this.notes.findIndex(n => n.id === note.id);
       if (index !== -1) this.notes[index] = { ...note };
     } else {
-      // Adding a new note
-      this.notes.push({ ...note });
+      const newNote = { ...note, id: Date.now() };
+      this.notes.push(newNote);
     }
 
     this.filteredNotes = [...this.notes];
-    this.closeEditor();
+    this.isEditorOpen = false;
   }
 
-  deleteNote(i: number) {
-    this.notes.splice(i, 1);
+  deleteNote(index: number) {
+    this.notes.splice(index, 1);
     this.filteredNotes = [...this.notes];
   }
 
   closeEditor() {
     this.isEditorOpen = false;
-    this.selectedNote = null;
   }
 
   setCategory(category: string) {
-    // Placeholder - later we can filter by category
-    console.log(`Filter set to: ${category}`);
+    console.log('Filter set to:', category);
   }
 }
