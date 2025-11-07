@@ -1,47 +1,78 @@
-  <div class="login-container">
-    <div class="logo-section">
-      <div class="logo">
-        <span class="logo-icon">📝</span>
-      </div>
-      <h1>Join SimplyNotes</h1>
-      <p class="subtitle">Create your account below.</p>
+<div class="login-container">
+  <div class="logo-section">
+    <div class="logo">
+      <span class="logo-icon">📝</span>
+    </div>
+    <h1>Join SimplyNotes</h1>
+    <p class="subtitle">Create your account below.</p>
+  </div>
+
+  <form (ngSubmit)="onSignup()" #signupForm="ngForm">
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input 
+        type="text" 
+        id="name" 
+        placeholder="Enter your name" 
+        [(ngModel)]="name" 
+        name="name" 
+        required
+      />
     </div>
 
-    <form (ngSubmit)="onSignup()">
-      <div class="form-group">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" placeholder="Enter your name" required>
-      </div>
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input 
+        type="email" 
+        id="email" 
+        placeholder="Enter your email" 
+        [(ngModel)]="email" 
+        name="email" 
+        required
+      />
+    </div>
 
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" placeholder="Enter your email" required>
-      </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input 
+        type="password" 
+        id="password" 
+        placeholder="Create a password" 
+        [(ngModel)]="password" 
+        name="password" 
+        required
+      />
+    </div>
 
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Create a password" required>
-      </div>
+    <div class="form-group">
+      <label for="accountType">Account Type</label>
+      <select 
+        id="accountType" 
+        [(ngModel)]="accountType" 
+        name="accountType" 
+        required
+      >
+        <option value="">Select a role...</option>
+        <option value="viewer">Viewer</option>
+        <option value="editor">Editor</option>
+        <option value="commenter">Commenter</option>
+      </select>
+    </div>
 
-      <div class="form-group">
-        <label for="accountType">Account Type</label>
-        <select id="accountType" required>
-          <option value="">Select a role...</option>
-          <option value="viewer">Viewer</option>
-          <option value="editor">Editor</option>
-          <option value="commenter">Commenter</option>
-        </select>
-      </div>
+    <button 
+      type="submit" 
+      class="login-button" 
+      [disabled]="!signupForm.valid"
+    >
+      Create Account
+    </button>
 
-      <button type="submit" class="login-button">Create Account</button>
+    <div class="divider">
+      <span>OR</span>
+    </div>
 
-      <div class="divider">
-        <span>OR</span>
-      </div>
-
-      <div class="signup-link">
-        Already have an account? <a routerLink="/">Login</a>
-
-      </div>
-    </form>
-  </div>
+    <div class="signup-link">
+      Already have an account? <a routerLink="/">Login</a>
+    </div>
+  </form>
+</div>

@@ -1,49 +1,59 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
-interface Note {
-  title: string;
-  content: string;
-  category: string;
-}
+import { FormsModule } from '@angular/forms';
+import { NoteEditorComponent } from '../note-editor/note-editor.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterModule, FormsModule, CommonModule],
+  imports: [CommonModule, FormsModule, NoteEditorComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  notes: Note[] = [];
+  notes = [
+    { title: 'Sample Note', content: 'This is an example note.' }
+  ];
+  filteredNotes = this.notes;
+  isEditorOpen = false;
+  selectedNote: any = null;
+  searchQuery = '';
 
-  newTitle = '';
-  newContent = '';
-  newCategory = 'all';
-
-  addNote() {
-    if (!this.newTitle || !this.newContent) return;
-    this.notes.push({
-      title: this.newTitle,
-      content: this.newContent,
-      category: this.newCategory
-    });
-    this.newTitle = '';
-    this.newContent = '';
+  openEditor() {
+    this.selectedNote = null;
+    this.isEditorOpen = true;
   }
 
-  deleteNote(index: number) {
-    this.notes.splice(index, 1);
+  editNote(note: any) {
+    this.selectedNote = { ...note };
+    this.isEditorOpen = true;
+  }
+
+  saveNote(note: any) {
+    if (this.selectedNote) {
+      // Update existing
+      const index = this.notes.findIndex(n => n.title === this.selectedNote.title);
+      if (index !== -1) this.notes[index] = note;
+    } else {
+      // Create new
+      this.notes.push(note);
+    }
+    this.filteredNotes = [...this.notes];
+    this.closeEditor();
+  }
+
+  deleteNote(i: number) {
+    this.notes.splice(i, 1);
+    this.filteredNotes = [...this.notes];
+  }
+
+  closeEditor() {
+    this.isEditorOpen = false;
+    this.selectedNote = null;
   }
 
   setCategory(category: string) {
-    this.newCategory = category;
-  }
-
-  get filteredNotes() {
-    if (this.newCategory === 'all') return this.notes;
-    return this.notes.filter(note => note.category === this.newCategory);
+    // Placeholder - later we can filter by category
+    console.log(`Filter set to: ${category}`);
   }
 }

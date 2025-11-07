@@ -1,0 +1,16 @@
+<div class="editor-overlay">
+  <div class="editor-modal">
+    <h3>{{ note?.title ? 'Edit Note' : 'New Note' }}</h3>
+
+    <label>Title</label>
+    <input [(ngModel)]="note.title" placeholder="Enter note title" />
+
+    <label>Content</label>
+    <textarea [(ngModel)]="note.content" rows="6" placeholder="Write your note here..."></textarea>
+
+    <div class="editor-actions">
+      <button (click)="onSave()">Save</button>
+      <button (click)="onCancel()">Cancel</button>
+    </div>
+  </div>
+</div>
