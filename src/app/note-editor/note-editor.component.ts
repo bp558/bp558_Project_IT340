@@ -15,7 +15,7 @@ export class NoteEditorComponent {
   @Output() close = new EventEmitter<void>();
 
   onSave() {
-    this.save.emit(this.note);
+  this.save.emit({ ...this.note }); // emit a copy
   }
 
   onCancel() {

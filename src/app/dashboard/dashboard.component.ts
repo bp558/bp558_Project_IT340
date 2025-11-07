@@ -31,13 +31,14 @@ export class DashboardComponent {
 
   saveNote(note: any) {
     if (this.selectedNote) {
-      // Update existing
+      // Update existing note
       const index = this.notes.findIndex(n => n.title === this.selectedNote.title);
-      if (index !== -1) this.notes[index] = note;
+      if (index !== -1) this.notes[index] = { ...note };
     } else {
-      // Create new
-      this.notes.push(note);
+      // Add new note
+      this.notes.push({ ...note });
     }
+
     this.filteredNotes = [...this.notes];
     this.closeEditor();
   }
