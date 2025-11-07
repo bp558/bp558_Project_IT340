@@ -36,7 +36,8 @@
           type="search"
           placeholder="Search notes..."
           [(ngModel)]="searchQuery"
-          aria-label="Search notes" />
+          aria-label="Search notes"
+        />
       </div>
       <div>
         <button class="new-note" (click)="openEditor()">+ New Note</button>
@@ -56,10 +57,10 @@
   </section>
 </main>
 
-<!-- Note editor modal -->
+<!-- ✅ Only show the editor when open -->
 <app-note-editor
   *ngIf="isEditorOpen"
   [note]="selectedNote"
   (save)="saveNote($event)"
-  (close)="closeEditor()">
-</app-note-editor>
+  (cancel)="closeEditor()"
+></app-note-editor>

@@ -31,11 +31,13 @@ export class DashboardComponent {
 
   saveNote(note: any) {
     if (this.selectedNote) {
-      // Update existing note
-      const index = this.notes.findIndex(n => n.title === this.selectedNote.title);
+      // Editing an existing note
+      const index = this.notes.findIndex(
+        n => n.title === this.selectedNote.title && n.content === this.selectedNote.content
+      );
       if (index !== -1) this.notes[index] = { ...note };
     } else {
-      // Add new note
+      // Adding a new note
       this.notes.push({ ...note });
     }
 
