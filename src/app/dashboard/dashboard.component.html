@@ -32,7 +32,11 @@
   <section class="main">
     <div class="toolbar">
       <div class="search-box">
-        <input type="search" placeholder="Search notes..." [(ngModel)]="searchQuery" aria-label="Search notes" />
+        <input
+          type="search"
+          placeholder="Search notes..."
+          [(ngModel)]="searchQuery"
+          aria-label="Search notes" />
       </div>
       <div>
         <button class="new-note" (click)="openEditor()">+ New Note</button>
@@ -52,7 +56,10 @@
   </section>
 </main>
 
-<!-- Note Editor Modal -->
+<!-- Note editor modal -->
 <app-note-editor
   *ngIf="isEditorOpen"
-  [note]="select
+  [note]="selectedNote"
+  (save)="saveNote($event)"
+  (close)="closeEditor()">
+</app-note-editor>
