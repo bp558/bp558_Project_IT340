@@ -32,10 +32,15 @@
   <section class="main">
     <div class="toolbar">
       <div class="search-box">
-        <input type="search" placeholder="Search notes..." [(ngModel)]="newTitle" aria-label="Search notes" />
+        <input
+          type="search"
+          placeholder="Search notes..."
+          [(ngModel)]="searchQuery"
+          aria-label="Search notes"
+        />
       </div>
       <div>
-        <button class="new-note" (click)="addNote()">+ New Note</button>
+        <button class="new-note" (click)="openEditor()">+ New Note</button>
       </div>
     </div>
 
@@ -44,9 +49,20 @@
         <h4>{{ note.title }}</h4>
         <p>{{ note.content }}</p>
         <div class="note-actions">
+          <button (click)="editNote(note)">Edit</button>
           <button (click)="deleteNote(i)">Delete</button>
         </div>
       </div>
     </div>
   </section>
 </main>
+
+<!-- ✅ Only show the editor when open -->
+<!-- Editor Modal -->
+<app-note-editor
+  *ngIf="isEditorOpen"
+  [note]="selectedNote"
+  (save)="saveNote($event)"
+  (cancel)="closeEditor()"
+></app-note-editor>
+

@@ -1,49 +1,64 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
-interface Note {
-  title: string;
-  content: string;
-  category: string;
-}
+import { FormsModule } from '@angular/forms';
+import { NoteEditorComponent } from '../note-editor/note-editor.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterModule, FormsModule, CommonModule],
+  imports: [CommonModule, FormsModule, NoteEditorComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  notes: Note[] = [];
+  // === Data ===
+  notes = [
+    { id: 1, title: 'Sample Note', content: 'This is an example note.' }
+  ];
+  filteredNotes = [...this.notes];
 
-  newTitle = '';
-  newContent = '';
-  newCategory = 'all';
+  // === State ===
+  isEditorOpen = false;
+  selectedNote: any = { id: null, title: '', content: '' };
+  searchQuery = ''; // 👈 This was missing and caused your TS2339 error
 
-  addNote() {
-    if (!this.newTitle || !this.newContent) return;
-    this.notes.push({
-      title: this.newTitle,
-      content: this.newContent,
-      category: this.newCategory
-    });
-    this.newTitle = '';
-    this.newContent = '';
+  // === Methods ===
+  openEditor() {
+    this.selectedNote = { id: null, title: '', content: '' };
+    this.isEditorOpen = true;
+  }
+
+  editNote(note: any) {
+    this.selectedNote = { ...note };
+    this.isEditorOpen = true;
+  }
+
+  saveNote(note: any) {
+    if (note.id) {
+      // Update existing note
+      const index = this.notes.findIndex(n => n.id === note.id);
+      if (index !== -1) this.notes[index] = { ...note };
+    } else {
+      // Add new note
+      const newNote = { ...note, id: Date.now() };
+      this.notes.push(newNote);
+    }
+
+    // Refresh dashboard
+    this.filteredNotes = [...this.notes];
+    this.closeEditor();
   }
 
   deleteNote(index: number) {
     this.notes.splice(index, 1);
+    this.filteredNotes = [...this.notes];
+  }
+
+  closeEditor() {
+    this.isEditorOpen = false;
   }
 
   setCategory(category: string) {
-    this.newCategory = category;
-  }
-
-  get filteredNotes() {
-    if (this.newCategory === 'all') return this.notes;
-    return this.notes.filter(note => note.category === this.newCategory);
+    console.log('Filter set to:', category);
   }
 }

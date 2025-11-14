@@ -1,21 +1,30 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // ✅ for ngModel
 
 @Component({
   selector: 'app-signup',
-  standalone: true,
-  imports: [RouterModule, FormsModule, CommonModule],
+  standalone: true,      // ✅ standalone component
+  imports: [FormsModule],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  newEmail = '';
-  newPassword = '';
+  name: string = '';
+  email: string = '';
+  password: string = '';
+  accountType: string = '';
 
   onSignup() {
-    // Placeholder logic: redirect to dashboard
-    console.log('Signup with', this.newEmail, this.newPassword);
+    if (this.name && this.email && this.password && this.accountType) {
+      console.log('Signing up with:', {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        accountType: this.accountType
+      });
+      // TODO: Replace this with your signup API call
+    } else {
+      console.log('Please fill out all fields.');
+    }
   }
 }

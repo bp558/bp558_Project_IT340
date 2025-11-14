@@ -1,0 +1,21 @@
+<div class="modal-backdrop">
+  <div class="modal">
+    <h3>{{ note.id ? 'Edit Note' : 'New Note' }}</h3>
+
+    <input
+      type="text"
+      placeholder="Note title"
+      [(ngModel)]="note.title"
+    />
+
+    <textarea
+      placeholder="Write your note..."
+      [(ngModel)]="note.content"
+    ></textarea>
+
+    <div class="buttons">
+      <button (click)="saveNote()">Save</button>
+      <button (click)="cancelEdit()">Cancel</button>
+    </div>
+  </div>
+</div>
