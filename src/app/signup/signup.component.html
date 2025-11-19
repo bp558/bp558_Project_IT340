@@ -8,17 +8,6 @@
   </div>
 
   <form (ngSubmit)="onSignup()" #signupForm="ngForm">
-    <div class="form-group">
-      <label for="name">Full Name</label>
-      <input 
-        type="text" 
-        id="name" 
-        placeholder="Enter your name" 
-        [(ngModel)]="name" 
-        name="name" 
-        required
-      />
-    </div>
 
     <div class="form-group">
       <label for="email">Email Address</label>
@@ -45,17 +34,17 @@
     </div>
 
     <div class="form-group">
-      <label for="accountType">Account Type</label>
+      <label for="accountType">Department</label>
       <select 
         id="accountType" 
         [(ngModel)]="accountType" 
-        name="accountType" 
+        name="department" 
         required
       >
-        <option value="">Select a role...</option>
-        <option value="viewer">Viewer</option>
-        <option value="editor">Editor</option>
-        <option value="commenter">Commenter</option>
+        <option value="">Select a department...</option>
+        <option value="Development">Development</option>
+        <option value="Marketing">Marketing</option>
+        <option value="Support">Support</option>
       </select>
     </div>
 

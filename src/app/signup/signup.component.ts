@@ -1,30 +1,37 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // ✅ for ngModel
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
-  standalone: true,      // ✅ standalone component
+  standalone: true,
   imports: [FormsModule],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  name: string = '';
-  email: string = '';
-  password: string = '';
-  accountType: string = '';
+
+  email = '';
+  password = '';
+  accountType = '';
+
+  constructor(private auth: AuthService, private router: Router) {}
 
   onSignup() {
-    if (this.name && this.email && this.password && this.accountType) {
-      console.log('Signing up with:', {
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        accountType: this.accountType
-      });
-      // TODO: Replace this with your signup API call
-    } else {
-      console.log('Please fill out all fields.');
-    }
+    const payload = {
+      email: this.email,
+      password: this.password,
+      department: this.accountType
+    };
+
+    this.auth.register(payload).subscribe({
+      next: () => {
+        console.log("Signup successful");
+        this.router.navigate(['/']); // back to login
+      },
+      error: (err) => console.error("Signup failed:", err.error)
+    });
   }
 }
+

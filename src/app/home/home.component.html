@@ -7,7 +7,6 @@
     <p class="subtitle">Organize your notes, your way</p>
   </div>
 
-  <!-- Angular form -->
   <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
 
     <div class="form-group">
@@ -34,7 +33,9 @@
       />
     </div>
 
-    <button type="submit" class="login-button" [disabled]="!loginForm.valid">Login</button>
+    <button type="submit" class="login-button" [disabled]="!loginForm.valid">
+      Login
+    </button>
   </form>
 
   <div class="divider"><span>or</span></div>
