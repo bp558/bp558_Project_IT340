@@ -30,7 +30,7 @@ export class SignupComponent {
         console.log("Signup successful");
         this.router.navigate(['/']); // back to login
       },
-      error: (err) => console.error("Signup failed:", err.error)
+      error: (err:any) => console.error("Signup failed:", err.error)
     });
   }
 }

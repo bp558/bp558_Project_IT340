@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = 'http://192.168.56.20:3000/api';
+  private apiUrl = 'http://192.168.56.30:3000/api';
 
   constructor(private http: HttpClient) {}
 
@@ -23,11 +23,7 @@ export class AuthService {
     localStorage.setItem('token', token);
   }
 
-  getToken(): string | null {
+  getToken() {
     return localStorage.getItem('token');
-  }
-
-  logout() {
-    localStorage.removeItem('token');
   }
 }

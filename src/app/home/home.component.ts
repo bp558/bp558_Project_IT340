@@ -28,7 +28,7 @@ export class HomeComponent {
         this.auth.saveToken(res.token);
         this.router.navigate(['/dashboard']);
       },
-      error: (err) => console.error("Login error:", err.error)
+      error: (err: any) => console.error("Login error:", err.error)
     });
   }
 }
