@@ -1,32 +1,30 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NotesService } from '../services/notes.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-note-editor',
+  standalone: true,
+  imports: [
+    CommonModule,   // Required for *ngIf, *ngFor (future-proof)
+    FormsModule     // REQUIRED for ngModel
+  ],
   templateUrl: './note-editor.component.html',
   styleUrls: ['./note-editor.component.css']
 })
 export class NoteEditorComponent {
-
-  @Input() note: any = null;
-  @Output() saved = new EventEmitter<void>();
-  @Output() closed = new EventEmitter<void>();
-
-  constructor(private notesService: NotesService) {}
+  @Input() note = { id: null, title: '', content: '' };
+  @Output() save = new EventEmitter<any>();
+  @Output() cancel = new EventEmitter<void>();
 
   saveNote() {
-    if (this.note._id) {
-      this.notesService.updateNote(this.note._id, this.note).subscribe({
-        next: () => this.saved.emit()
-      });
-    } else {
-      this.notesService.createNote(this.note).subscribe({
-        next: () => this.saved.emit()
-      });
+    // Only save if something was written
+    if (this.note.title.trim() || this.note.content.trim()) {
+      this.save.emit({ ...this.note });
     }
   }
 
-  closeEditor() {
-    this.closed.emit();
+  cancelEdit() {
+    this.cancel.emit();
   }
 }
