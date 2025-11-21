@@ -25,25 +25,28 @@ export class NoteEditorComponent {
   constructor(
     private notesService: NotesService,
     private toast: ToastService
-  ) {}
+  ) { }
 
   saveNote() {
     if (!this.note.title || !this.note.content) return;
 
-    const request = this.note._id
-      ? this.notesService.updateNote(this.note._id, this.note)
+    const request = this.note.id
+      ? this.notesService.updateNote(this.note.id, this.note)
       : this.notesService.createNote(this.note);
 
     request.subscribe({
-      next: () => {
+      next: (res) => {
         this.toast.show('Note saved!');
-        this.save.emit();
-        this.closeEditor.emit();   // notify parent
+        this.save.emit(res);  // <-- emit saved note to parent
+        this.closeEditor.emit(); // <-- auto-close editor
       },
       error: (e) => {
-        console.error(e);
         this.toast.show('Error saving note');
+        console.error(e);
       }
     });
+  }
+  cancelEdit() {
+    this.closeEditor.emit(); // triggers parent to hide modal
   }
 }
