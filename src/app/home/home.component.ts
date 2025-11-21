@@ -15,7 +15,7 @@ export class HomeComponent {
   email = '';
   password = '';
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) { }
 
   onSubmit() {
     const payload = {
@@ -25,10 +25,22 @@ export class HomeComponent {
 
     this.auth.login(payload).subscribe({
       next: (res: any) => {
+        // Save token
         this.auth.saveToken(res.token);
+
+        // Decode token to get user info
+        const payloadData = JSON.parse(atob(res.token.split('.')[1]));
+        const user = {
+          email: payloadData.email || '',       // email from token
+          department: payloadData.department    // department from token
+        };
+        localStorage.setItem('user', JSON.stringify(user));
+
+        // Navigate to dashboard
         this.router.navigate(['/dashboard']);
       },
       error: (err: any) => console.error("Login error:", err.error)
     });
+
   }
 }
