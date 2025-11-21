@@ -11,34 +11,36 @@ import { ToastService } from '../services/toast.service';
   styleUrls: ['./note-editor.component.css']
 })
 export class NoteEditorComponent {
-
-  // note can be: new note OR existing note
-  @Input() note: any = {
-    _id: null,
-    title: '',
-    content: ''
-  };
-
-  @Output() closeEditor = new EventEmitter<void>();
-  @Output() save = new EventEmitter<any>();   // notify dashboard
+  @Input() note: any = { title: '', content: '', department: '' };
+  @Output() save = new EventEmitter<any>();
+  @Output() cancel = new EventEmitter<void>();
 
   constructor(
     private notesService: NotesService,
     private toast: ToastService
-  ) { }
+  ) {}
 
   saveNote() {
-    if (!this.note.title || !this.note.content) return;
+    if (!this.note.title || !this.note.content) {
+      this.toast.show('Please enter a title and content');
+      return;
+    }
 
-    const request = this.note.id
-      ? this.notesService.updateNote(this.note.id, this.note)
+    // Make sure department is set
+    if (!this.note.department) {
+      this.toast.show('Error: note department not set');
+      return;
+    }
+
+    const request = this.note._id
+      ? this.notesService.updateNote(this.note._id, this.note)
       : this.notesService.createNote(this.note);
 
     request.subscribe({
       next: (res) => {
         this.toast.show('Note saved!');
-        this.save.emit(res);  // <-- emit saved note to parent
-        this.closeEditor.emit(); // <-- auto-close editor
+        this.save.emit(res);     // send saved note to parent
+        this.cancel.emit();      // auto-close editor
       },
       error: (e) => {
         this.toast.show('Error saving note');
@@ -46,7 +48,8 @@ export class NoteEditorComponent {
       }
     });
   }
-  cancelEdit() {
-    this.closeEditor.emit(); // triggers parent to hide modal
+
+  closeEditor() {
+    this.cancel.emit();
   }
 }
