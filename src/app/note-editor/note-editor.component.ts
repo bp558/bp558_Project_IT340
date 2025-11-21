@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NotesService } from '../services/notes.service';
-import { ToastService } from '../toast.service';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-note-editor',
