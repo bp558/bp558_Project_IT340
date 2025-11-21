@@ -11,12 +11,11 @@ export class NotesService {
   constructor(private http: HttpClient) {}
 
   getNotesForDepartment(department: string) {
-  // ignore department parameter, backend uses JWT to filter
-  return this.http.get<any[]>(`${this.apiUrl}`);
-}
+    return this.http.get<any[]>(this.apiUrl);
+  }
 
   createNote(note: any) {
-    return this.http.post(`${this.apiUrl}`, note);
+    return this.http.post(this.apiUrl, note);
   }
 
   updateNote(id: string, note: any) {

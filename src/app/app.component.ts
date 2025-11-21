@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { NoteEditorComponent } from './note-editor/note-editor.component';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +7,7 @@ import { NoteEditorComponent } from './note-editor/note-editor.component';
   imports: [
     RouterOutlet,
     RouterLink,
-    RouterLinkActive,
-    DashboardComponent,
-    NoteEditorComponent
+    RouterLinkActive
   ],
   templateUrl: './app.html',
   styleUrls: ['./app.css']

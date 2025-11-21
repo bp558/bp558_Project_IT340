@@ -9,6 +9,7 @@
 
   <div class="actions">
     <button (click)="saveNote()">Save</button>
-    <button (click)="closeEditor.emit()">Close</button>
+    <!-- call the component method that emits the cancel event -->
+    <button (click)="cancelEdit()">Close</button>
   </div>
 </div>
