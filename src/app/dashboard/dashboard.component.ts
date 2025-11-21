@@ -5,6 +5,7 @@ import { NoteEditorComponent } from '../note-editor/note-editor.component';
 import { NotesService } from '../services/notes.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,8 @@ import { Router } from '@angular/router';
   imports: [
     CommonModule,        // ngIf / ngFor
     FormsModule,         // ngModel
-    NoteEditorComponent  // app-note-editor
+    NoteEditorComponent,  // app-note-editor
+    RouterModule
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
