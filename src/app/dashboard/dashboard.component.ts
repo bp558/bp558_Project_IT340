@@ -1,10 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NoteEditorComponent } from '../note-editor/note-editor.component';
 import { NotesService } from '../services/notes.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
+  imports: [
+    CommonModule,        // ngIf / ngFor
+    FormsModule,         // ngModel
+    NoteEditorComponent  // app-note-editor
+  ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })

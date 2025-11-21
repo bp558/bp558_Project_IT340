@@ -9,7 +9,7 @@ export class AuthService {
 
   private apiUrl = 'http://192.168.56.20:3000/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   register(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, data);
@@ -26,4 +26,15 @@ export class AuthService {
   getToken() {
     return localStorage.getItem('token');
   }
+
+  getCurrentUser() {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  }
+
 }
