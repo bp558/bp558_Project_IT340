@@ -1,30 +1,22 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-note-editor',
   standalone: true,
-  imports: [
-    CommonModule,   // Required for *ngIf, *ngFor (future-proof)
-    FormsModule     // REQUIRED for ngModel
-  ],
+  imports: [FormsModule],
   templateUrl: './note-editor.component.html',
   styleUrls: ['./note-editor.component.css']
 })
 export class NoteEditorComponent {
   @Input() note = { id: null, title: '', content: '' };
+
+  // 👇 This fixes your error
+  @Output() closeEditor = new EventEmitter<void>();
+
   @Output() save = new EventEmitter<any>();
-  @Output() cancel = new EventEmitter<void>();
 
   saveNote() {
-    // Only save if something was written
-    if (this.note.title.trim() || this.note.content.trim()) {
-      this.save.emit({ ...this.note });
-    }
-  }
-
-  cancelEdit() {
-    this.cancel.emit();
+    this.save.emit(this.note);
   }
 }
