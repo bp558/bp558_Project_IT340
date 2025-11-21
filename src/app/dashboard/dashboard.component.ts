@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,        // ngIf / ngFor
     FormsModule,         // ngModel
-    NoteEditorComponent,  // app-note-editor
+    NoteEditorComponent,  // app-
     RouterModule
   ],
   templateUrl: './dashboard.component.html',
