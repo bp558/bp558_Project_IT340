@@ -1,6 +1,6 @@
 <div class="note-editor">
 
-  <h3>{{ note._id ? 'Edit Note' : 'New Note' }}</h3>
+  <h3>{{ note._id || note.id ? 'Edit Note' : 'New Note' }}</h3>
 
   <label>Title</label>
   <input
@@ -18,7 +18,7 @@
 
   <div class="editor-actions">
     <button (click)="saveNote()">Save</button>
-    <button (click)="closeEditor()">Close</button>
+    <button (click)="cancelEdit()">Close</button>
   </div>
 
 </div>
