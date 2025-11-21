@@ -1,21 +1,24 @@
-<div class="modal-backdrop">
-  <div class="modal">
-    <h3>{{ note.id ? 'Edit Note' : 'New Note' }}</h3>
+<div class="note-editor">
 
-    <input
-      type="text"
-      placeholder="Note title"
-      [(ngModel)]="note.title"
-    />
+  <h3>{{ note._id ? 'Edit Note' : 'New Note' }}</h3>
 
-    <textarea
-      placeholder="Write your note..."
-      [(ngModel)]="note.content"
-    ></textarea>
+  <label>Title</label>
+  <input
+    type="text"
+    [(ngModel)]="note.title"
+    placeholder="Enter title"
+  >
 
-    <div class="buttons">
-      <button (click)="saveNote()">Save</button>
-      <button (click)="cancelEdit()">Cancel</button>
-    </div>
+  <label>Content</label>
+  <textarea
+    [(ngModel)]="note.content"
+    rows="10"
+    placeholder="Write your note..."
+  ></textarea>
+
+  <div class="editor-actions">
+    <button (click)="saveNote()">Save</button>
+    <button (click)="closeEditor()">Close</button>
   </div>
+
 </div>
