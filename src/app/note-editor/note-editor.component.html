@@ -1,24 +1,14 @@
-<div class="note-editor">
+<div class="editor-container">
+  <h3>{{ note.id ? 'Edit Note' : 'New Note' }}</h3>
 
-  <h3>{{ note._id || note.id ? 'Edit Note' : 'New Note' }}</h3>
+  <label>Title:</label>
+  <input type="text" [(ngModel)]="note.title" />
 
-  <label>Title</label>
-  <input
-    type="text"
-    [(ngModel)]="note.title"
-    placeholder="Enter title"
-  >
+  <label>Content:</label>
+  <textarea rows="5" [(ngModel)]="note.content"></textarea>
 
-  <label>Content</label>
-  <textarea
-    [(ngModel)]="note.content"
-    rows="10"
-    placeholder="Write your note..."
-  ></textarea>
-
-  <div class="editor-actions">
+  <div class="actions">
     <button (click)="saveNote()">Save</button>
-    <button (click)="cancelEdit()">Close</button>
+    <button (click)="closeEditor.emit()">Close</button>
   </div>
-
 </div>
